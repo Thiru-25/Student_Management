@@ -1,22 +1,41 @@
-import React from 'react'
-import Header from './Header'
-import MainBody from './MainBody'
-import Heading from './Heading'
-import { Outlet } from 'react-router-dom'
+import { Outlet } from "react-router-dom";
+
+import Header from "./Header";
+import Heading from "./Heading";
+import MainBody from "./MainBody";
 
 function SideBarPage() {
   return (
-    <main className='bg-blue-200 h-screen grid grid-cols-12 '>
-      <section className='col-span-2'>
-      <Header/>
-      <MainBody/>
+    <div className="flex h-screen bg-slate-100 overflow-hidden">
+
+      {/* Sidebar */}
+
+      <aside className="w-64 bg-white border-r flex flex-col">
+
+        <Header />
+
+        <MainBody />
+
+      </aside>
+
+      {/* Main Content */}
+
+      <section className="flex-1 flex flex-col bg-slate-100">
+
+        <Heading />
+
+        <main className="flex-1 overflow-y-auto">
+
+          <div className="p-8 min-h-full">
+            <Outlet />
+          </div>
+
+        </main>
+
       </section>
-      <section className='col-span-10'>
-        <Heading/>
-        <Outlet/>
-      </section>
-    </main>
-  )
+
+    </div>
+  );
 }
 
-export default SideBarPage
+export default SideBarPage;

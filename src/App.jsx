@@ -1,31 +1,117 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import './Styles/Global.css'
-import DashBoardPage from './Component/Dashboard/DashBoardPage'
-import StudentPage from './Component/Students/StudentPage'
-import TeacherPage from './Component/Teachers/TeacherPage'
-import SideBarPage from './Component/SideBar/SideBarPage'
+import { Routes, Route } from "react-router-dom";
 
-function App() 
-{
-  return(
+import "./Styles/Global.css";
 
-    <>
-   
-    <BrowserRouter>
-      <Routes>
-       < Route path='/' element={<SideBarPage/>}>
-      <Route index path='' element={<DashBoardPage/>}/>
-      <Route path='/students' element={<StudentPage/>}/>
-      <Route path='/teachers' element={<TeacherPage/>}/>
-</Route>
-      </Routes>
+// Layout
+import SideBarPage from "./Component/SideBar/SideBarPage";
 
-    </BrowserRouter>
-    </>
+// Pages
+import DashBoardPage from "./Component/Dashboard/DashboardPage";
+import StudentPage from "./Component/Students/StudentPage";
+import TeacherPage from "./Component/Teachers/TeacherPage";
+import UserPage from "./Component/User/UserPage";
 
+// Authentication
+import LoginPage from "./auth/LoginPage";
+import ProtectedRoute from "./auth/ProtectedRoute";
+import Unauthorized from "./auth/Unauthorized";
 
+function App() {
+  return (
+    <Routes>
+      {/* =========================
+          Public Routes
+      ========================== */}
 
-  )
+      <Route path="/login" element={<LoginPage />} />
+
+      <Route
+        path="/unauthorized"
+        element={<Unauthorized />}
+      />
+
+      {/* =========================
+          Protected Layout
+      ========================== */}
+
+      <Route
+        path="/"
+        element={
+          <ProtectedRoute>
+            <SideBarPage />
+          </ProtectedRoute>
+        }
+      >
+        {/* Dashboard */}
+        <Route
+          index
+          element={
+            <ProtectedRoute
+              roles={[
+                "ADMIN",
+                "TEACHER",
+                "STUDENT",
+              ]}
+            >
+              <DashBoardPage />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Students */}
+        <Route
+          path="students"
+          element={
+            <ProtectedRoute
+              roles={[
+                "ADMIN",
+                "TEACHER",
+                "STUDENT",
+              ]}
+            >
+              <StudentPage />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Teachers */}
+        <Route
+          path="teachers"
+          element={
+            <ProtectedRoute
+              roles={[
+                "ADMIN",
+                "TEACHER",
+              ]}
+            >
+              <TeacherPage />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Users */}
+        <Route
+          path="users"
+          element={
+            <ProtectedRoute
+              roles={["ADMIN"]}
+            >
+              <UserPage />
+            </ProtectedRoute>
+          }
+        />
+      </Route>
+
+      {/* =========================
+          404 Page
+      ========================== */}
+
+      <Route
+        path="*"
+        element={<h1>404 - Page Not Found</h1>}
+      />
+    </Routes>
+  );
 }
 
-export default App
+export default App;
