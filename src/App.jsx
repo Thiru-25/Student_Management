@@ -15,6 +15,7 @@ import UserPage from "./Component/User/UserPage";
 import LoginPage from "./auth/LoginPage";
 import ProtectedRoute from "./auth/ProtectedRoute";
 import Unauthorized from "./auth/Unauthorized";
+import DashboardPage from "./Component/Dashboard/DashBoardPage";
 
 function App() {
   return (
@@ -53,7 +54,7 @@ function App() {
                 "STUDENT",
               ]}
             >
-              <DashBoardPage />
+              <DashboardPage />
             </ProtectedRoute>
           }
         />
