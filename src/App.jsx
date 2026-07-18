@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 import "./Styles/Global.css";
 
@@ -6,7 +6,6 @@ import "./Styles/Global.css";
 import SideBarPage from "./Component/SideBar/SideBarPage";
 
 // Pages
-import DashBoardPage from "./Component/Dashboard/DashboardPage";
 import StudentPage from "./Component/Students/StudentPage";
 import TeacherPage from "./Component/Teachers/TeacherPage";
 import UserPage from "./Component/User/UserPage";
@@ -15,7 +14,7 @@ import UserPage from "./Component/User/UserPage";
 import LoginPage from "./auth/LoginPage";
 import ProtectedRoute from "./auth/ProtectedRoute";
 import Unauthorized from "./auth/Unauthorized";
-import DashboardPage from "./Component/Dashboard/DashBoardPage";
+import DashboardPage from "./Component/Dashboard/DashboardPage";
 
 function App() {
   return (
